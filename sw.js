@@ -1,5 +1,5 @@
 const STATIC_CACHE = "static";
-const DYNAMIC_CACHE = "dynamic-v4";
+const DYNAMIC_CACHE = "dynamic-v5";
 
 self.addEventListener("install", function (event) {
   console.log("Installed", event);
@@ -48,7 +48,7 @@ self.addEventListener("activate", function (event) {
 
 self.addEventListener("fetch", function (event) {
   event.respondWith(
-    caches.match(event.request, { ignoreSearch: true }).then((response) => {
+    caches.match(event.request).then((response) => {
       if (response) {
         return response;
       } else {
