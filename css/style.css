@@ -113,7 +113,7 @@ header .right {
   display: flex;
   justify-content: flex-start;
 }
-header .right form {
+/* header .right form {
   display: none;
   align-items: center;
   background-color: #efefef;
@@ -124,7 +124,7 @@ header .right .search form img {
   display: block;
   margin-right: 8px;
   width: 15px;
-}
+} */
 header .right .button {
   background: rgb(4, 107, 246);
   padding: 13px 45px;
@@ -136,11 +136,11 @@ header .right .button {
   cursor: pointer;
   display: block;
 }
-header .right .form input {
+/* header .right .form input {
   color: #8d8d8d;
   font-size: 13px;
   opacity: 1;
-}
+} */
 .head,
 .main {
   margin-top: 83px;
