@@ -44,13 +44,15 @@ $(document).ready(function () {
     },
   });
 
-  var button = document.getElementById("install-button");
+ var button = document.getElementById("install-button");
 
-  if (button) {
-    button.addEventListener("click", installApp);
-  }
+if (button) {
+  button.addEventListener("click", installApp);
+
+  // hide button if app is already installed
   if (window.matchMedia('(display-mode: standalone)').matches) {
-  button.style.display = "none";
+    button.style.display = "none";
+  }
 }
 });
 
