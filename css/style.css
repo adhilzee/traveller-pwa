@@ -301,7 +301,7 @@ ul.gallery-images li img {
   .items {
     grid-template-columns: repeat(2, 1fr);
   }
-  header .right form {
+  .right form {
     display: none;
   }
 }
@@ -309,6 +309,7 @@ ul.gallery-images li img {
   .items {
     grid-template-columns: repeat(1, 1fr);
   }
-  header .right form {
+  .right form {
     display: none;
+  }
 }
