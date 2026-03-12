@@ -48,19 +48,19 @@ $(document).ready(function () {
   if (button) {
 
   // Hide button if running as installed PWA
-  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-    button.style.display = "none";
-  }
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      button.style.display = "none";
+    }
 
-  button.addEventListener("click", installApp);
-}
+    button.addEventListener("click", installApp);
+  }
 
   window.addEventListener("appinstalled", () => {
-  console.log("App installed");
-  if (button) {
-    button.style.display = "none";
-  }
-});
+    console.log("App installed");
+    if (button) {
+      button.style.display = "none";
+    }
+  });
  
 });
 
