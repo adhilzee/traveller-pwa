@@ -1,6 +1,15 @@
 var askPrompt = null;
 var button = document.getElementById("install-button");
 
+// CHECK IF INDEX PAGE
+function isIndexPage() {
+  return (
+    window.location.pathname.endsWith("index.html") ||
+    window.location.pathname.endsWith("/traveller-pwa/") ||
+    window.location.pathname === "/"
+  );
+}
+
 $(document).ready(function () {
 
   // LOAD CATEGORIES
@@ -9,21 +18,22 @@ $(document).ready(function () {
     success: function (response) {
 
       let categories = response.data;
-      let categories_html = "";
+      let html = "";
 
       categories.forEach((category) => {
-        categories_html += `
-          <li>
-            <a href="#">
-              <img class="rest" src="${category.image}" alt="${category.name}" />
-              <span>${category.name}</span>
-            </a>
-          </li>`;
+        html += `
+        <li>
+          <a href="#">
+            <img class="rest" src="${category.image}" alt="${category.name}" />
+            <span>${category.name}</span>
+          </a>
+        </li>`;
       });
 
-      $("div.head ul").append(categories_html);
+      $("div.head ul").append(html);
     },
   });
+
 
   // LOAD PLACES
   $.ajax({
@@ -31,35 +41,40 @@ $(document).ready(function () {
     success: function (response) {
 
       let places = response.data;
-      let places_html = "";
+      let html = "";
 
       places.forEach((place) => {
-        places_html += `
-          <div class="item">
-            <a href="detail.html?id=${place.id}">
-              <div class="top">
-                <img src="${place.image}" alt="${place.name}" />
-              </div>
-              <div class="middle">
-                <h3>${place.name}</h3>
-              </div>
-              <div class="bottom">
-                <img src="images/place.svg" alt="Image" />
-                <span>${place.location}</span>
-              </div>
-            </a>
-          </div>`;
+        html += `
+        <div class="item">
+          <a href="detail.html?id=${place.id}">
+            <div class="top">
+              <img src="${place.image}" alt="${place.name}" />
+            </div>
+            <div class="middle">
+              <h3>${place.name}</h3>
+            </div>
+            <div class="bottom">
+              <img src="images/place.svg" alt="">
+              <span>${place.location}</span>
+            </div>
+          </a>
+        </div>`;
       });
 
-      $("div.items").append(places_html);
+      $("div.items").append(html);
     },
   });
 
-  // INSTALL BUTTON LOGIC
+
   if (button) {
 
-    // Hide button if running as installed app
+    // Hide if installed
     if (window.matchMedia('(display-mode: standalone)').matches) {
+      button.style.display = "none";
+    }
+
+    // Hide if NOT index page
+    if (!isIndexPage()) {
       button.style.display = "none";
     }
 
@@ -69,7 +84,7 @@ $(document).ready(function () {
 });
 
 
-// SERVICE WORKER REGISTER
+// REGISTER SERVICE WORKER
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("./sw.js").then(function () {
     console.log("Service worker registered!");
@@ -78,7 +93,7 @@ if ("serviceWorker" in navigator) {
 
 
 // INSTALL FUNCTION
-const installApp = () => {
+function installApp() {
 
   if (askPrompt) {
 
@@ -86,42 +101,34 @@ const installApp = () => {
 
     askPrompt.userChoice.then((result) => {
 
-      console.log(result.outcome);
-
-      if (result.outcome === "dismissed") {
-        console.log("User dismissed");
+      if (result.outcome === "accepted") {
+        console.log("User installed");
       } else {
-        console.log("App installed");
+        console.log("User dismissed");
       }
 
       askPrompt = null;
 
     });
   }
+}
 
-};
 
-
-// TRIGGER INSTALL PROMPT
+// INSTALL PROMPT EVENT
 window.addEventListener("beforeinstallprompt", (event) => {
 
-  console.log("before install prompt triggered");
-
   event.preventDefault();
-
   askPrompt = event;
 
-  if (button) {
+  if (button && isIndexPage()) {
     button.style.display = "block";
   }
 
 });
 
 
-// AFTER INSTALL HIDE BUTTON
+// AFTER INSTALL
 window.addEventListener("appinstalled", () => {
-
-  console.log("App installed");
 
   if (button) {
     button.style.display = "none";
