@@ -142,14 +142,6 @@ header .right .form input {
   font-size: 13px;
   opacity: 1;
 }
-header .right .back-btn{
-  padding:8px 12px;
-  background:#000;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-  margin:10px;
-}
 .head,
 .main {
   margin-top: 83px;
