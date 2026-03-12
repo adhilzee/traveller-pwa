@@ -3,7 +3,7 @@
   "short_name": "Moke Travel",
   "description": "Ultimate Travel Guide",
   "id": "./",
-  "start_url": "./index.html",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#fff",
