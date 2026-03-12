@@ -306,4 +306,6 @@ ul.gallery-images li img {
   .items {
     grid-template-columns: repeat(1, 1fr);
   }
+  header .right form {
+    diplay:none;
 }
