@@ -47,20 +47,18 @@ $(document).ready(function () {
 
   if (button) {
 
-  // Hide button if running as installed PWA
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+  // hide install button if not on index page
+    if (!window.location.pathname.includes("index.html") && window.location.pathname !== "/traveller-pwa/") {
+      button.style.display = "none";
+    }
+
+  // hide if app already installed
+    if (window.matchMedia('(display-mode: standalone)').matches) {
       button.style.display = "none";
     }
 
     button.addEventListener("click", installApp);
   }
-
-  window.addEventListener("appinstalled", () => {
-    console.log("App installed");
-    if (button) {
-      button.style.display = "none";
-    }
-  });
  
 });
 
