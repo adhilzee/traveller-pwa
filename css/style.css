@@ -114,7 +114,7 @@ header .right {
   justify-content: flex-start;
 }
 header .right form {
-  display: block;
+  display: none;
   align-items: center;
   background-color: #efefef;
   padding: 10px;
