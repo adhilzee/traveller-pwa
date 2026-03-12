@@ -49,6 +49,9 @@ $(document).ready(function () {
   if (button) {
     button.addEventListener("click", installApp);
   }
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+  button.style.display = "none";
+}
 });
 
 var askPrompt;
@@ -84,4 +87,8 @@ window.addEventListener("beforeinstallprompt", (event) => {
   askPrompt = event;
   event.preventDefault();
   button.style.display = "block";
+});
+window.addEventListener("appinstalled", () => {
+  console.log("App installed");
+  button.style.display = "none";
 });
