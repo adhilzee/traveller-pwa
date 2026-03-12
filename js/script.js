@@ -43,17 +43,25 @@ $(document).ready(function () {
       $("div.items").append(places_html);
     },
   });
+  var button = document.getElementById("install-button");
 
- var button = document.getElementById("install-button");
+  if (button) {
 
-if (button) {
-  button.addEventListener("click", installApp);
-
-  // hide button if app is already installed
-  if (window.matchMedia('(display-mode: standalone)').matches) {
+  // Hide button if running as installed PWA
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
     button.style.display = "none";
   }
+
+  button.addEventListener("click", installApp);
 }
+
+  window.addEventListener("appinstalled", () => {
+  console.log("App installed");
+  if (button) {
+    button.style.display = "none";
+  }
+});
+ 
 });
 
 var askPrompt;
