@@ -301,9 +301,9 @@ ul.gallery-images li img {
   .items {
     grid-template-columns: repeat(2, 1fr);
   }
-  /* header .right form {
+  header .right form {
     display: none;
-  } */
+  }
 }
 @media all and (max-width: 480px) {
   .items {
